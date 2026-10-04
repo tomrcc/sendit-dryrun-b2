@@ -1,7 +1,7 @@
 ---
 _schema: default
 date: 2022-03-07T00:00:00Z
-title: Conseils pour la délivrabilité de vos e-mails
+title: Conseils pour la délivrabilité de vos e-mails TOM
 categories:
   - Email
 author: Gerard Hopper
@@ -10,10 +10,10 @@ thumbImg:
 featuredImg:
   image_path: /images/blog/featured-image.jpg
 seo:
-  page_description: 
-  canonical_url: 
-  featured_image: 
-  author_twitter_handle: 
+  page_description:
+  canonical_url:
+  featured_image:
+  author_twitter_handle:
   open_graph_type:
   no_index: false
 draft: false
