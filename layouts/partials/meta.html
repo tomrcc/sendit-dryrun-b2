@@ -1,0 +1,73 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=5"
+/>
+{{- /* Rosey head keys only on pages with no translated content file (hybrid setup) */ -}}
+{{- $root := .Path | strings.TrimPrefix "/" | default "index" -}}
+{{- $roseyContent := partial "rosey-content.html" . -}}
+<!-- Page description for SEO -->
+{{ if .Params.seo.page_description }}
+    {{- $attrs := "" }}{{ if $roseyContent }}{{ $attrs = printf ` data-rosey-attrs-explicit='{"content":"%s:page_description"}'` $root }}{{ end }}
+    <meta name="description" content="{{ .Params.seo.page_description }}"{{ $attrs | safeHTMLAttr }}>
+    <meta property="og:description" content="{{ .Params.seo.page_description }}"{{ $attrs | safeHTMLAttr }} />
+{{ else }}
+    {{- /* Pages without their own description share one site-wide key */}}
+    <meta name="description" content="{{ hugo.Data.meta.description }}" data-rosey-attrs-explicit='{"content":"page_description"}'>
+    <meta property="og:description" content="{{ hugo.Data.meta.description }}" data-rosey-attrs-explicit='{"content":"page_description"}' />
+{{ end }}
+
+<!-- Meta tags for open graph and twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="{{ hugo.Data.meta.twitter_site }}" />
+{{ if eq .Permalink "/" }}
+    <meta name="og:title" content="{{ hugo.Data.meta.site_title }}" />
+    <meta property="og:type" content="website" />
+    <meta name="og:image" content="{{ hugo.Data.meta.image }}" />
+    <meta name="twitter:creator" content="{{ hugo.Data.meta.twitter_site }}" />
+    <meta name="twitter:title" content="{{ hugo.Data.meta.title }}" />
+    {{ with hugo.Data.meta.twitter_image }}
+    <meta name="twitter:image" content="{{ . }}" />
+    {{ else }}
+    <meta name="twitter:image" content="{{ hugo.Data.meta.image }}" />
+    {{ end }}
+{{ else }}
+    {{- $titleAttrs := "" }}{{ if $roseyContent }}{{ $titleAttrs = printf ` data-rosey-attrs-explicit='{"content":"%s:title"}'` $root }}{{ end }}
+    <meta name="og:title" content="{{ .Title }}"{{ $titleAttrs | safeHTMLAttr }} />
+    <meta name="twitter:title" content="{{ .Title }}"{{ $titleAttrs | safeHTMLAttr }} />
+    {{ with .Params.seo.open_graph_type }}
+    <meta property="og:type" content="{{ . }}" />
+    {{ else }}
+    <meta property="og:type" content="website" />
+    {{ end }}
+    {{ with .Params.seo.featured_image }}
+    <meta name="og:image" content="{{ . }}" />
+    <meta name="twitter:image" content="{{ . }}" />
+    {{ else }}
+    <meta name="og:image" content="{{ hugo.Data.meta.image }}" />
+    {{ with hugo.Data.meta.twitter_image }}
+        <meta name="twitter:image" content="{{ . }}" />
+    {{ else }}
+        <meta name="twitter:image" content="{{ hugo.Data.meta.image }}" />
+    {{ end }}
+    {{ end }}
+    {{ with .Params.seo.author_twitter_handle }}  
+    <meta name="twitter:creator" content="{{ . }}" />
+    {{ else }}
+    <meta name="twitter:creator" content="{{ .Site.Params.twitter_site }}" />
+    {{ end }}
+{{ end }}
+
+<!-- Add robots no index -->
+{{ if .Params.seo.no_index }}
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+{{ end }}
+
+<!-- Canonical URL for SEO -->
+{{ with .Params.seo.canonical_url }}
+    <link rel="canonical" href="{{ hugo.Data.meta.BaseURL }}{{ . | absURL }}" />
+{{ else }}
+    <link rel="canonical" href="{{ hugo.Data.meta.BaseURL }}{{ .RelPermalink }}" />  
+{{ end }}

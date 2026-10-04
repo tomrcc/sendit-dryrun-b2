@@ -1,0 +1,34 @@
+label: Testimonial
+description: Testimonial section
+icon: 3p
+tags: []
+picker_preview:
+  text: [Testimonial]
+  icon: [3p]
+preview:
+  text:
+    - template: '{title} {title_suffix}'
+    - Testimonial
+  subtext: [Testimonial]
+  icon: [3p]
+value:
+  _name: global/testimonial
+  _uuid:
+  title: Build relationships that
+  title_suffix: last
+  description: Customers from around the world are building game changing email marketing campaigns.
+  slider:
+    - image_path: /images/testimonial/logo-2.jpg
+      _uuid:
+      author: Pete Fish
+      designation: CMO at Clear Appeal
+      message: Sendit has taken Clear Appeal to the next level with it's beautiful targetted email campaigns.
+_inputs_from_glob:
+  - /.cloudcannon/inputs/inline-markdown.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/heading.cloudcannon.inputs.yml
+_inputs:
+  slider:
+    type: array
+    label: Testimonials
+    options:
+      structures: _structures.testimonials

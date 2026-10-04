@@ -1,0 +1,5 @@
+{{- /* One helper for every category/tag chip label, so every render site produces the same Rosey original.
+       Context: the term as written in front matter. */ -}}
+{{- $overrides := dict "seo" "SEO" -}}
+{{- $label := index $overrides (lower .) | default (humanize .) -}}
+{{- return $label -}}

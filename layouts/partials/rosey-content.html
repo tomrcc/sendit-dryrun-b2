@@ -1,0 +1,7 @@
+{{- /* layouts/partials/rosey-content.html — context: a page.
+       True when no non-default language has a content file for it. */ -}}
+{{- $hasFile := false -}}
+{{- range .AllTranslations -}}
+  {{- if and .File (ne .Language.Lang hugo.Sites.Default.Language.Lang) }}{{ $hasFile = true }}{{ end -}}
+{{- end -}}
+{{- return not $hasFile -}}

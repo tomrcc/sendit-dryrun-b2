@@ -1,0 +1,13 @@
+{{- $rk := partial "rosey-content.html" page -}}
+<section class="pricing-inner @@bg-color"{{ with ._uuid }} data-rosey-ns="{{ . }}"{{ end }}>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="section-header position-relative text-center">
+          <h2 data-editable="text" data-prop="title"{{ if $rk }} data-rosey="title"{{ end }}>{{.title}}</h2>
+          <p data-editable="text" data-type="text" data-prop="description"{{ if $rk }} data-rosey="description"{{ end }}>{{ page.RenderString .description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

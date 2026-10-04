@@ -1,0 +1,12 @@
+{{- $rk := partial "rosey-content.html" page -}}
+<section class="privacy-hero"{{ with ._uuid }} data-rosey-ns="{{ . }}"{{ end }}>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="privacy-hero-content text-center">
+          <h1 data-editable="text" data-prop="title"{{ if $rk }} data-rosey="title"{{ end }}>{{.title}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

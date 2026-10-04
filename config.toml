@@ -1,0 +1,29 @@
+baseURL = ''
+locale = 'en-us'
+title = 'Sendit'
+
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+disableDefaultLanguageRedirect = true
+
+[languages.en]
+  label = 'English'
+  locale = 'en-us'
+  weight = 1
+  contentDir = 'content'
+[languages.fr]
+  label = 'Français'
+  locale = 'fr-fr'
+  weight = 2
+  contentDir = 'content_fr'
+
+# The locales the visitor-facing picker and the RCC exclusion list read
+[[params.locales]]
+  code = 'en'
+  label = 'English'
+[[params.locales]]
+  code = 'fr'
+  label = 'Français'
+
+[[module.imports]]
+path = 'github.com/CloudCannon/editable-regions'

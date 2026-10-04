@@ -1,0 +1,27 @@
+{{- $rk := partial "rosey-content.html" page -}}
+<div class="team"{{ with ._uuid }} data-rosey-ns="{{ . }}"{{ end }}>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-7 mx-auto">
+        <div class="section-header">
+          <h2 data-editable="text" data-prop="title"{{ if $rk }} data-rosey="title"{{ end }}>{{.title}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row" data-editable="array" data-prop="team_members">
+      {{ range .team_members }}
+      <div class="col-lg-3 col-md-6" data-editable="array-item"{{ with ._uuid }} data-rosey-ns="{{ . }}"{{ end }}>
+        <div class="team-member">
+          <div class="team-member-thumb rounded-box">
+            <img src="{{.image_path}}" alt="team-member-1 png" loading="lazy" data-editable="image" data-prop-src="image_path" />
+          </div>
+          <div class="team-member-details">
+            <h3 data-editable="text" data-prop="name">{{.name}}</h3>
+            <p data-editable="text" data-prop="designation">{{.designation}}</p>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
